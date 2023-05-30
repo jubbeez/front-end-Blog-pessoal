@@ -3,10 +3,18 @@ import { Box } from "@mui/material";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import "./Footer.css";
+import { useSelector } from "react-redux";
+import { TokenState } from "../../../store/tokens/tokensReducer";
 
 function Footer() {
-  return (
-    <>
+  const token = useSelector<TokenState, TokenState["tokens"]>(
+    (state) => state.tokens
+  );
+
+  var footerComponent;
+
+  if (token !== "") {
+    footerComponent = (
       <Grid
         container
         direction="row"
@@ -31,12 +39,12 @@ function Footer() {
               </Typography>
             </Box>
             <Box display="flex" alignItems="center" justifyContent="center">
-              <a href="https://github.com/jubbeez" target="_blank">
+              <a href="https://github.com/chris-kauffmann" target="_blank">
                 <GitHubIcon className="redeGit" />
               </a>
 
               <a
-                href="https://www.linkedin.com/in/julia-guarnieri-dev/"
+                href="https://www.linkedin.com/in/christine-outi-kauffmann/"
                 target="_blank"
               >
                 <LinkedInIcon className="redes" />
@@ -73,8 +81,9 @@ function Footer() {
           </Box>
         </Grid>
       </Grid>
-    </>
-  );
+    );
+  }
+  return <>{footerComponent}</>;
 }
 
 export default Footer;
